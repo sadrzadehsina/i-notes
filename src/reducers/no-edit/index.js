@@ -1,0 +1,1 @@
+export { noEdit } from './no-edit';

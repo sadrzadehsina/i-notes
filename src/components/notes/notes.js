@@ -5,9 +5,8 @@ import { Note } from '../note';
 export const Notes = ({ notes }) => {
 
 	const renderNote = note => (
-		<Grid xs={4}>
+		<Grid xs={4} key={note.id}>
 			<Note 
-				key={note.id}
 				id={note.id}
 				title={note.title} 
 				body={note.body} 
