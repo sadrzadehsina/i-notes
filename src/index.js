@@ -3,14 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { GeistProvider, CssBaseline } from '@geist-ui/react';
-
 ReactDOM.render(
   <React.StrictMode>
-    <GeistProvider>
-      <CssBaseline />
-      <App />
-    </GeistProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
