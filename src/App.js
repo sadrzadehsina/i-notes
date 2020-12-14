@@ -16,7 +16,7 @@ import {
   Grid,
 } from '@geist-ui/react';
 
-import { Notes, AddNote } from './components';
+import { Notes, AddEditNote } from './components';
 import { useNotes, useStorage } from './hooks';
 
 import {
@@ -33,6 +33,7 @@ const App = () => {
   const [storedNotes, storeNotes] = useStorage('notes', []);
 
   const { visible, setVisible, bindings } = useModal(false);
+  const [initialState, setInitialState] = useState({});
 
   const title = useInput();
 
@@ -62,6 +63,11 @@ const App = () => {
 
   const openAddModal = () => setVisible(true);
 
+  const openEditModal = ({ id, title, body }) => {
+    setVisible(true);
+    setInitialState({ id, title, body });
+  };
+
   // Syncing with local storage
   useEffect(() => {
     storeNotes(notes.items);
@@ -79,11 +85,19 @@ const App = () => {
         </Page.Header>
         <Page.Content>
           <Grid.Container gap={2}>
-            <Notes notes={notes.items} />
+            <Notes 
+              notes={notes.items} 
+              onEdit={openEditModal}
+            />
           </Grid.Container>
         </Page.Content>
       </Page>
-      <AddNote addNote={addNote} {...bindings} />
+      <AddEditNote 
+        addNote={addNote} 
+        editNote={editNote}
+        initialState={initialState}
+        {...bindings}
+      />
     </GeistProvider>
   );
 
