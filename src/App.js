@@ -17,7 +17,7 @@ import {
 } from '@geist-ui/react';
 
 import { Notes, AddNote } from './components';
-import { useNotes } from './hooks';
+import { useNotes, useStorage } from './hooks';
 
 import {
   combineReducers,
@@ -26,17 +26,11 @@ import {
   noEdit,
 } from './reducers';
 
-const initialState = [
-  { 
-    id: 2, 
-    title: 'Test Note', 
-    body: 'Here is my first test note that I am going to view every single day',
-  },
-];
-
 const App = () => {
 
   const [themeType, setThemeType] = useState('dark');
+
+  const [storedNotes, storeNotes] = useStorage('notes', []);
 
   const { visible, setVisible, bindings } = useModal(false);
 
@@ -50,7 +44,7 @@ const App = () => {
     noEdit,
   );
 
-  const notes = useNotes({ reducer, initialState });
+  const notes = useNotes({ reducer, initialState: storedNotes });
 
   const addNote = ({ title, body }) => {
     const note = { id: 2, title, body };
@@ -67,6 +61,11 @@ const App = () => {
   const deleteNote = id => notes.delete({ id });
 
   const openAddModal = () => setVisible(true);
+
+  // Syncing with local storage
+  useEffect(() => {
+    storeNotes(notes.items);
+  }, [notes.items]);
 
   return (
     <GeistProvider theme={{ type: themeType }}>
