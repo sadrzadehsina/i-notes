@@ -88,6 +88,7 @@ const App = () => {
             <Notes 
               notes={notes.items} 
               onEdit={openEditModal}
+              onDelete={deleteNote}
             />
           </Grid.Container>
         </Page.Content>

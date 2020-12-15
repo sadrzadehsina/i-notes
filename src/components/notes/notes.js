@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from '@geist-ui/react';
 import { Note } from '../note';
 
-export const Notes = ({ notes, onEdit }) => {
+export const Notes = ({ notes, onEdit, onDelete }) => {
 
 	const renderNote = note => (
 		<Grid xs={6} key={note.id}>
@@ -10,8 +10,8 @@ export const Notes = ({ notes, onEdit }) => {
 				id={note.id}
 				title={note.title} 
 				body={note.body} 
-				onEdit={() => onEdit({ id: note.id, title: note.title, body: note.body })} 
-				onDelete={note.onDelete}
+				onEdit={onEdit} 
+				onDelete={onDelete}
 			/>
 		</Grid>
 	);

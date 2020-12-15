@@ -3,7 +3,7 @@ import { Card, Divider, Text, ButtonGroup, Button } from '@geist-ui/react';
 import Edit from '@geist-ui/react-icons/edit';
 import Delete from '@geist-ui/react-icons/delete';
 
-export const Note = ({ id, title, body, onDelete, onEdit }) => {
+export const Note = ({ id, title, body, onEdit, onDelete }) => {
 
 	return (
 		<Card>
@@ -14,8 +14,8 @@ export const Note = ({ id, title, body, onDelete, onEdit }) => {
 			<Card.Content>{body}</Card.Content>
 			<Card.Footer>
 				<ButtonGroup>
-					<Button icon={<Edit />} size="small" onClick={() => onEdit(id)} />
-					<Button icon={<Delete />} size="small" onClick={() => onDelete(id)} />
+					<Button icon={<Edit />} size="small" onClick={() => onEdit({ id, title, body })} />
+					<Button icon={<Delete />} size="small" onClick={() => onDelete({ id })} />
 				</ButtonGroup>
 			</Card.Footer>
 		</Card>

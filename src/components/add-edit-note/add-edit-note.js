@@ -11,6 +11,10 @@ import {
 
 const isEmptyObject = obj => Object.keys(obj).length === 0;
 
+const modalTitle = isEdit => isEdit ? 'Edit note' : 'Add a new note';
+
+const submitLabel = isEdit => isEdit ? 'Edit' : 'Add';
+
 export const AddEditNote = ({ 
 	open, 
 	onClose, 
@@ -19,17 +23,13 @@ export const AddEditNote = ({
 	initialState = {},
 }) => {
 
-	const isEdit = initialState => !isEmptyObject(initialState);
+	const { id } = initialState;
 
-	const id = initialState.id;
+	const isEdit = initialState => !isEmptyObject(initialState);
 
 	const title = useInput(initialState.title);
 
 	const body = useInput(initialState.body);
-
-	const modalTitle = isEdit => isEdit ? 'Edit note' : 'Add a new note';
-
-	const submitLabel = isEdit => isEdit ? 'Edit' : 'Add';
 
 	const submitFn = isEdit => isEdit ? edit : add;
 
