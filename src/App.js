@@ -14,7 +14,11 @@ import {
   Textarea,
   Spacer,
   Grid,
+  Row,
+  Col,
 } from '@geist-ui/react';
+
+import { Plus } from '@geist-ui/react-icons'
 
 import { Notes, AddEditNote } from './components';
 import { useNotes, useStorage } from './hooks';
@@ -33,6 +37,7 @@ const App = () => {
   const [storedNotes, storeNotes] = useStorage('notes', []);
 
   const { visible, setVisible, bindings } = useModal(false);
+
   const [initialState, setInitialState] = useState({});
 
   const title = useInput();
@@ -78,9 +83,13 @@ const App = () => {
       <CssBaseline />
       <Page size="large">
         <Page.Header>
-          <Text h1>iNotes</Text>
-          <Text h5>where I keep all my notes!</Text>
-          <Button onClick={openAddModal}>Add a new note</Button>
+          <Row justify="center" align="bottom">
+            <Col span={22}>
+              <Text h1>iNotes</Text>
+              <Text h5>where I keep all my notes!</Text>
+            </Col>
+            <Col span={2}><Button icon={<Plus />} auto onClick={openAddModal} type="secondary-light">Add</Button></Col>
+          </Row>
           <Divider />
         </Page.Header>
         <Page.Content>
