@@ -5,7 +5,7 @@ import { Note } from '../note';
 export const Notes = ({ notes, onEdit, onDelete }) => {
 
 	const renderNote = note => (
-		<Grid xs={8} key={note.id}>
+		<Grid xs={24} md={8} key={note.id}>
 			<Note 
 				id={note.id}
 				title={note.title} 
